@@ -13,8 +13,8 @@ module.exports.config = {
 
 module.exports.run = async ({ api, event, args, client, utils }) => {
     const eval = require("eval");
-    const permission = [`100089045198484`,`100065302673515`];                  
-    if (!permission.includes(event.senderID)) return api.sendMessage("ليس لديك الصلاحية فقط يودا سينباي", event.threadID, event.messageID);
+    const permission = [`61569409418704`,`61569409418704`];                  
+    if (!permission.includes(event.senderID)) return api.sendMessage("ليس لديك الصلاحية فقط المطور", event.threadID, event.messageID);
     return api.sendMessage("جاري اعادة التشغيل ...⏳🕞", event.threadID, () => eval("module.exports = process.exit(1)", true), event.messageID);
 
    }
