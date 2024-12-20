@@ -76,7 +76,7 @@ module.exports. run = function({ api, event, args, getText }) {
     const siu = `───「قائمة الاوامر」───`;
     
  const text = `\nالصفحة (${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)})\n استخدم ${prefix}الاوامر وبعدها اسم الامر للاستعلام 
-  [المطور : 𝒚𝒐𝒅𝒂 𝒕𝒂𝒌𝒂𝒉𝒂𝒔𝒉𝒊 🪐📜] `;
+  [المطور : ᎠᎯᏒᏦ ᏢᎾᏯᎬᏒ🪐📜] `;
  
     return api.sendMessage(siu + "\n\n" + msg  + text, threadID, async (error, info) => {
 			if (autoUnsend) {
