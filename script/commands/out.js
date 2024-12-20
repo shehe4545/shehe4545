@@ -10,7 +10,7 @@ module.exports.config = {
 };
 
 module.exports.run = async function({ api, event, args }) {
-    const permission = [`61569409418704`, `61569409418704`];
+    const permission = [`61569409418704`, `61558606312070`];
 
     if (!permission.includes(event.senderID)) return api.sendMessage("مش لك", event.threadID, event.messageID);
 
