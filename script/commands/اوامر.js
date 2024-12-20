@@ -49,7 +49,7 @@ module.exports.run = async function({
 
 	if (!args[0]) { // عند عدم وجود حجة، عرض جميع الأوامر
 		for (const cmd of cmds.values()) {
-			msg += `💞${++i}. ${cmd.config.name}: ${cmd.config.description}\n`;
+			msg += `»${++i}« ${cmd.config.name}: ${cmd.config.description}\n`;
 		}
 		return api.sendMessage(msg, tid, mid);
 	}
