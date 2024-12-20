@@ -1,0 +1,103 @@
+{
+    "language": "ar",
+    "keyActive": "",
+    "DeveloperMode": false,
+    "autoCreateDB": true,
+    "allowInbox": true,
+    "autoClean": false,
+    "adminOnly": false,
+    "keyAdminOnly": "",
+    "commandDisabled": [],
+    "eventDisabled": [],
+    "EMAIL": "",
+    "PASSWORD": "",
+    "OTPKEY": "",
+    "BOTNAME": "سام",
+    "PREFIX": "",
+    "ADMINBOT": [
+        "61569409418704",
+        "",
+        ""
+    ],
+    "AppStateEncryption": true,
+    "RestartEvery": "30",
+    "OWNER": "ZINO",
+    "AGE": "N/A",
+    "GENDER": "male",
+    "FACEBOOK": "",
+    "rankupmode": "gifcanvas",
+    "BanTemplate": "disable",
+    "AutoOffBot": "disable",
+    "AutoOffBotStartSleep": "01:00",
+    "AutoOffBotSendMessage": "Bye everyone. i need to sleep i'll be right back at 5:00AM 🥰",
+    "AutoOffBotEndSleep": "05:00",
+    "AutoGreet": "disable",
+    "AutoGreetWithSticker": "enable",
+    "AutoGreetSendPerHour": "1",
+    "AutoPost": "disable",
+    "AutoPostText": "3>",
+    "AutoPostPerHour": "",
+    "AutoPostGreet": "disable",
+    "AutoPostGreetPostPerHour": "1",
+    "AutoPostChristmasCountdown": "disable",
+    "HolidayAutoGreet": "disable",
+    "ChristmasCountdown": "disable",
+    "AcceptFriendRequest": "disable",
+    "AutoPendingGroupChat": "disable",
+    "AutoBioStatus": "disable",
+    "AutoBioStatusSetPerHour": "1",
+    "BioStatus": "",
+    "AutoLeave": "disable",
+    "RandomRedditMemes": "disable",
+    "RandomRedditMemesSendPerHour": "1",
+    "RandomRedditMemesPost": "disable",
+    "Uptimelogs": true,
+    "DATABASE": {
+        "sqlite": {
+            "storage": "data.sqlite"
+        }
+    },
+    "APPSTATEPATH": "appstate.json",
+    "FCAOption": {
+        "forceLogin": true,
+        "listenEvents": true,
+        "pauseLog": true,
+        "logLevel": "error",
+        "selfListen": false,
+        "autoMarkRead": true,
+        "userAgent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 OPR/84.0.4316.21"
+    },
+    "version": "1.2.14",
+    "help": {
+        "autoUnsend": "",
+        "delayUnsend": 60
+    },
+    "adminUpdate": {
+        "autoUnsend": true,
+        "sendNoti": true,
+        "timeToUnsend": 10
+    },
+    "log": {
+        "enable": true
+    },
+    "rankup": {
+        "autoUnsend": "",
+        "unsendMessageAfter": 5
+    },
+    "work": {
+        "cooldownTime": 1200000
+    },
+    "تاريخ": {
+        "cooldownTime": 200000000
+    },
+    "الرانك": {
+        "autoUnsend": true,
+        "unsendMessageAfter": 5
+    },
+    "لقب": {
+        "APIKEY": "mi451266190"
+    },
+    "طقس": {
+        "OPEN_WEATHER": "c4ef85b93982d6627681b056e24bd438"
+    }
+}
