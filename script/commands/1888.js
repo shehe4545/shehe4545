@@ -26,6 +26,6 @@ let path = __dirname + `/cache/pol4i.png`;
   })).data;
   fs.writeFileSync(path, Buffer.from(poli, "utf-8"));
   api.sendMessage({
-    body: "✅تبقى الصورة لساعة✅",
+    body: "تفضل صورة 🤧✨بوت سام🤍😁",
     attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID);
 };
