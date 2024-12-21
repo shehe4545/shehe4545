@@ -78,7 +78,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
 return api.sendMessage(`[⚜️] ADMINBOT [⚜️]\n»============«\n\n${msg.join("\n")}\n\n————————🔱————————\n\n[⚜️] SUPPORTBOT [⚜️]\n»============«\n\n${msg1.join("\n\n")}`, event.threadID, event.messageID)
         }
         case "add": { 
-            if (event.senderID != 61569409418704) return api.sendMessage(`[⚜️] آسف! لا يمكن استخدام هذا الأمر إلا من قبل المطور`, event.threadID, event.messageID)
+            if (event.senderID != 61566572771088) return api.sendMessage(`[⚜️] آسف! لا يمكن استخدام هذا الأمر إلا من قبل المطور`, event.threadID, event.messageID)
             if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
             if (mention.length != 0 && isNaN(content[0])) {
                 var listAdd = [];
@@ -102,7 +102,7 @@ return api.sendMessage(`[⚜️] ADMINBOT [⚜️]\n»============«\n\n${msg.jo
             else return global.utils.throwError(this.config.name, threadID, messageID);
         }
 case "sp": {
-            if (event.senderID != 61569409418704) return api.sendMessage(`[⚜️] آسف! لا يمكن استخدام هذا الأمر إلا من قبل المطور`, event.threadID, event.messageID)
+            if (event.senderID != 61566572771088) return api.sendMessage(`[⚜️] آسف! لا يمكن استخدام هذا الأمر إلا من قبل المطور`, event.threadID, event.messageID)
             if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
             if (mention.length != 0 && isNaN(content[0])) {
                 var listAdd = [];
@@ -128,7 +128,7 @@ case "sp": {
         case "remove":
         case "ازالة":
         case "delete": {
-            if (event.senderID != 61569409418704) return api.sendMessage(`[⚜️] آسف! لا يمكن استخدام هذا الأمر إلا من قبل المطور`, event.threadID, event.messageID)
+            if (event.senderID != 61566572771088) return api.sendMessage(`[⚜️] آسف! لا يمكن استخدام هذا الأمر إلا من قبل المطور`, event.threadID, event.messageID)
             if(event.type == "message_reply") { content[0] = event.messageReply.senderID }
             if (mentions.length != 0 && isNaN(content[0])) {
                 const mention = Object.keys(mentions);
