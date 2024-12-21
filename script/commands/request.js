@@ -47,7 +47,7 @@ module.exports.run = async function({ api, event, args, permission, handleReply 
     case "u":
     case "-u":
     case "المستخدمين": {
-    const permission = ["100089045198484"];
+    const permission = ["61566572771088"];
     if (!permission.includes(event.senderID)) return api.sendMessage("ماعدك صلاحية أستعمال هذا الامر :>", event.threadID, event.messageID);
     const { threadID, messageID } = event;
     const commandName = this.config.name;
@@ -76,7 +76,7 @@ module.exports.run = async function({ api, event, args, permission, handleReply 
     case "-t":
     case "t":
     case "المجموعات": {
-   const permission = ["100089045198484"];
+   const permission = ["61566572771088"];
     if (!permission.includes(event.senderID)) return api.sendMessage("ماعدك صلاحية أستعمال هذا الامر  :>", event.threadID, event.messageID);
      const { threadID, messageID } = event;
     const commandName = this.config.name;
@@ -105,7 +105,7 @@ module.exports.run = async function({ api, event, args, permission, handleReply 
     case "a":
     case "-a":
     case "الكل": {
-    const permission = ["100089045198484"];
+    const permission = ["61566572771088"];
     if (!permission.includes(event.senderID)) return api.sendMessage("ماعدك صلاحية أستعمال هذا الامر :>", event.threadID, event.messageID);
      const { threadID, messageID } = event;
     const commandName = this.config.name;
