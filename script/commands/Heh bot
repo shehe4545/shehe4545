@@ -1,0 +1,66 @@
+const axios = require("axios");
+const fs = require("fs-extra");
+const request = require("request");
+module.exports.config = {
+	name: "تشابه",
+	version: "0.0.1",
+	hasPermssion: 0,
+	credits: "عمر",
+	description: "يبحث عن صور مشابهة في Pinterest",
+	commandCategory: "خدمات",
+	usages: "تشابه [رابط الصورة]",
+	cooldowns: 5,
+    dependencies: {
+        "axios": "",
+        "fs-extra": ""
+    }
+};
+
+module.exports.run = async ({ args, api, event }) => {
+    const { threadID, messageID } = event;
+
+    // الحصول على رابط الصورة في حال كانت الصورة مرفقة أو تم إرسال رابط
+    const imageUrl = event.messageReply ? event.messageReply.attachments[0].url : args.join(" ");
+    
+    if (!imageUrl) {
+        return api.sendMessage('الرجاء الرد على صورة أو إدخال رابط صورة للبحث عن صور مشابهة.', threadID, messageID);
+    }
+
+    try {
+        // تحميل الصورة من الرابط
+        const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        const imageBuffer = Buffer.from(response.data, 'binary');
+
+        // حفظ الصورة مؤقتا
+        const tempImagePath = __dirname + "/cache/tempImage.jpg";
+        fs.writeFileSync(tempImagePath, imageBuffer);
+
+        // إرسال الصورة إلى Pinterest API للبحث عن صور مشابهة
+        const pinterestApiUrl = "https://api.pinterest.com/v1/...";
+        const apiKey = "YOUR_PINTEREST_API_KEY"; // يجب استبدال هذا بمفتاح API الخاص بك
+        const formData = new FormData();
+        formData.append("image", fs.createReadStream(tempImagePath));
+
+        const pinterestResponse = await axios.post(pinterestApiUrl, formData, {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                ...formData.getHeaders()
+            }
+        });
+
+        // معالجة النتائج وإرسال الصور المشابهة
+        const similarImages = pinterestResponse.data.results;
+        if (similarImages.length > 0) {
+            let message = "تم العثور على صور مشابهة:\n";
+            similarImages.forEach((img, index) => {
+                message += `${index + 1}. [رابط الصورة](${img.url})\n`;
+            });
+            return api.sendMessage(message, threadID, messageID);
+        } else {
+            return api.sendMessage("لم يتم العثور على صور مشابهة.", threadID, messageID);
+        }
+    } catch (error) {
+        console.error(error);
+        return api.sendMessage("حدث خطأ أثناء البحث عن الصور.", threadID, messageID);
+    }
+};
