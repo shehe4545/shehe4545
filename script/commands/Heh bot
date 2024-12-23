@@ -1,66 +1,81 @@
 const axios = require("axios");
 const fs = require("fs-extra");
 const request = require("request");
+const { GoogleAuth } = require('google-auth-library');
+
 module.exports.config = {
-	name: "تشابه",
-	version: "0.0.1",
-	hasPermssion: 0,
-	credits: "عمر",
-	description: "يبحث عن صور مشابهة في Pinterest",
-	commandCategory: "خدمات",
-	usages: "تشابه [رابط الصورة]",
-	cooldowns: 5,
-    dependencies: {
-        "axios": "",
-        "fs-extra": ""
-    }
+  name: "تشابه",
+  version: "0.0.1",
+  hasPermssion: 0,
+  credits: "عمر",
+  description: "يبحث عن صور مشابهة باستخدام Google Vision API",
+  commandCategory: "خدمات",
+  usages: "تشابه [رابط الصورة]",
+  cooldowns: 5,
+  dependencies: {
+    "axios": "",
+    "fs-extra": ""
+  }
 };
 
 module.exports.run = async ({ args, api, event }) => {
-    const { threadID, messageID } = event;
+  const { threadID, messageID } = event;
 
-    // الحصول على رابط الصورة في حال كانت الصورة مرفقة أو تم إرسال رابط
-    const imageUrl = event.messageReply ? event.messageReply.attachments[0].url : args.join(" ");
-    
-    if (!imageUrl) {
-        return api.sendMessage('الرجاء الرد على صورة أو إدخال رابط صورة للبحث عن صور مشابهة.', threadID, messageID);
-    }
+  // الحصول على رابط الصورة في حال كانت الصورة مرفقة أو تم إرسال رابط
+  const imageUrl = event.messageReply ? event.messageReply.attachments[0].url : args.join(" ");
+  
+  if (!imageUrl) {
+    return api.sendMessage('الرجاء الرد على صورة أو إدخال رابط صورة للبحث عن صور مشابهة.', threadID, messageID);
+  }
 
-    try {
-        // تحميل الصورة من الرابط
-        const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-        const imageBuffer = Buffer.from(response.data, 'binary');
+  try {
+    // تحميل الصورة من الرابط
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const imageBuffer = Buffer.from(response.data, 'binary');
 
-        // حفظ الصورة مؤقتا
-        const tempImagePath = __dirname + "/cache/tempImage.jpg";
-        fs.writeFileSync(tempImagePath, imageBuffer);
+    // حفظ الصورة مؤقتا
+    const tempImagePath = __dirname + "/cache/tempImage.jpg";
+    fs.writeFileSync(tempImagePath, imageBuffer);
 
-        // إرسال الصورة إلى Pinterest API للبحث عن صور مشابهة
-        const pinterestApiUrl = "https://api.pinterest.com/v1/...";
-        const apiKey = "YOUR_PINTEREST_API_KEY"; // يجب استبدال هذا بمفتاح API الخاص بك
-        const formData = new FormData();
-        formData.append("image", fs.createReadStream(tempImagePath));
+    // إرسال الصورة إلى Google Vision API لتحليل محتواها
+    const googleApiKey = 'YOUR_GOOGLE_CLOUD_VISION_API_KEY';  // قم بوضع مفتاح API الخاص بك هنا
+    const visionUrl = `https://vision.googleapis.com/v1/images:annotate?key=${googleApiKey}`;
 
-        const pinterestResponse = await axios.post(pinterestApiUrl, formData, {
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                ...formData.getHeaders()
+    const requestBody = {
+      requests: [
+        {
+          image: {
+            content: imageBuffer.toString('base64')
+          },
+          features: [
+            {
+              type: "LABEL_DETECTION",
+              maxResults: 5
             }
-        });
-
-        // معالجة النتائج وإرسال الصور المشابهة
-        const similarImages = pinterestResponse.data.results;
-        if (similarImages.length > 0) {
-            let message = "تم العثور على صور مشابهة:\n";
-            similarImages.forEach((img, index) => {
-                message += `${index + 1}. [رابط الصورة](${img.url})\n`;
-            });
-            return api.sendMessage(message, threadID, messageID);
-        } else {
-            return api.sendMessage("لم يتم العثور على صور مشابهة.", threadID, messageID);
+          ]
         }
-    } catch (error) {
-        console.error(error);
-        return api.sendMessage("حدث خطأ أثناء البحث عن الصور.", threadID, messageID);
+      ]
+    };
+
+    const googleResponse = await axios.post(visionUrl, requestBody, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const labels = googleResponse.data.responses[0].labelAnnotations;
+    if (labels && labels.length > 0) {
+      let message = "تم العثور على صور مشابهة بناءً على تحليل الصورة:\n";
+      labels.forEach((label, index) => {
+        message += `${index + 1}. ${label.description} - احتمال: ${label.score.toFixed(2)}\n`;
+      });
+      return api.sendMessage(message, threadID, messageID);
+    } else {
+      return api.sendMessage("لم يتم العثور على نتائج مماثلة للصورة.", threadID, messageID);
     }
+
+  } catch (error) {
+    console.error(error);
+    return api.sendMessage("حدث خطأ أثناء البحث عن الصور.", threadID, messageID);
+  }
 };
