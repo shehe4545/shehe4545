@@ -1,0 +1,18 @@
+{
+    "name": "Dagmawi A. Sultan",
+    "ID": "100031977606857",
+    "shield": 3,
+    "coins": 200,
+    "Island": {
+        "level": 1,
+        "coinsLV": 200,
+        "data": {
+            "tower": 10,
+            "tree": 10,
+            "pool": 10,
+            "pet": 10
+        }
+    },
+    "spin": 21,
+    "timeRegister": "02:31:26, 11/8/2023"
+}

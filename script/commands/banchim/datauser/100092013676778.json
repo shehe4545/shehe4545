@@ -1,0 +1,18 @@
+{
+    "name": "Luffy San",
+    "ID": "100092013676778",
+    "shield": 3,
+    "coins": 200,
+    "Island": {
+        "level": 1,
+        "coinsLV": 200,
+        "data": {
+            "tower": 10,
+            "tree": 10,
+            "pool": 0,
+            "pet": 0
+        }
+    },
+    "spin": 26,
+    "timeRegister": "23:52:26, 5/8/2023"
+}

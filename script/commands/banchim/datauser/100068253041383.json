@@ -1,0 +1,18 @@
+{
+    "name": "Kojo Aktsuke Afmlear",
+    "ID": "100068253041383",
+    "shield": 3,
+    "coins": 200,
+    "Island": {
+        "level": 1,
+        "coinsLV": 200,
+        "data": {
+            "tower": 10,
+            "tree": 0,
+            "pool": 0,
+            "pet": 0
+        }
+    },
+    "spin": 23,
+    "timeRegister": "16:04:47, 8/5/2023"
+}

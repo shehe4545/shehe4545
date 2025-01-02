@@ -1,0 +1,18 @@
+{
+    "name": "乃 乃",
+    "ID": "100025043207634",
+    "shield": 3,
+    "coins": 6000000,
+    "Island": {
+        "level": 60,
+        "coinsLV": 200,
+        "data": {
+            "tower": 50,
+            "tree": 50,
+            "pool": 50,
+            "pet": 50
+        }
+    },
+    "spin": 0,
+    "timeRegister": "07:23:09, 4/5/2023"
+}
